@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Habilidad de Alexa para escuchar cuentos de Pancho Madrigal",
   "main": "dist/server.js",
+  "engines": {
+    "node": "12.x"
+  },
   "scripts": {
     "dev": "nodemon src/server.ts --exec 'ts-node -r tsconfig-paths/register src/server.ts'",
     "stage": "ngrok http 3002",
