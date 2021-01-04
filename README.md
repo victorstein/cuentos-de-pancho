@@ -25,7 +25,7 @@ Tecnologias usadas:
 * Instala dependencias
 	```npm install```
 
-* Create a .env file with the following set up. (examples in parentheses)
+* Crea un archivo .env con la siguiente configuracion.
 
 | KEY | DESCRIPTION | REQUIRED | DEFAULT
 | ------ | ------ | ------ | --------- |
@@ -35,7 +35,7 @@ ALLOWED_ORIGINS | Origines permitidos para usar el API, separados por coma. | FA
 CHANNEL_ID | Id del canal de youtube para obtener los adios | TRUE | 
 GOOGLE_API_KEY | Llave secreta para usar el API de Youtube | TRUE |
 
-* Para empezar el desarrollo puedes usar el comando ```npm run dev``` para transpilar a JS, ```npm run build``` o ```npm start``` (una vez transpilado) para inciar el servidor desde la carpeta dist.
+* Para empezar el desarrollo puedes usar el comando ```npm run dev```. Para transpilar a JS puedes usar ```npm run build``` o ```npm start``` (una vez transpilado) para inciar el servidor desde la carpeta dist.
 
 ## Como contribuir
 
