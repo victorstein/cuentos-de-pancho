@@ -1,3 +1,4 @@
+import { VoxaEvent } from "voxa"
 import views from "./views/views"
 
 export enum STATES {
@@ -8,14 +9,29 @@ export enum STATES {
   storyNotFoundState = 'storyNotFoundState',
   storyFoundState = 'storyFoundState',
   searchingState = 'searchingState',
-  shouldPlayStoryState = 'shouldPlayStoryState'
+  shouldPlayStoryState = 'shouldPlayStoryState',
+  playRandomState = 'PlayRandomIntent'
 }
 
 export enum INTENTS {
   LaunchIntent = 'LaunchIntent',
-  PlayRandomIntent = 'PlayRandomIntent',
   CancelIntent = 'CancelIntent',
   PauseIntent = 'PauseIntent'
+}
+
+export type Intent = {
+  name: INTENTS
+  handler: (voxaEvent: VoxaEvent) => VoxaTransitionObject | Promise<VoxaTransitionObject>
+}
+
+export type State = {
+  name: STATES
+  handler: (voxaEvent: VoxaEvent) => VoxaTransitionObject | Promise<VoxaTransitionObject>
+}
+
+export type Listeners = {
+  states: Array<State>
+  intents: Array<Intent>
 }
 
 enum LANGUAGES {
@@ -33,20 +49,20 @@ export enum FLOWTYPES {
   terminate = 'terminate'
 }
 
-export type translation = {
+export type Translation = {
   [y: string]: {
     [key in keyof typeof ACTIONS]?: string
   }
 }
 
-export type viewType = {
+export type ViewType = {
   [key in keyof typeof LANGUAGES]?: {
-    translation: translation
+    translation: Translation
   }
 }
 
-export type voxaTransitionObject = {
-  flow: keyof typeof FLOWTYPES
+export type VoxaTransitionObject = {
+  flow?: keyof typeof FLOWTYPES
   reply?: keyof typeof views
   to?: keyof typeof STATES
   say?: string
@@ -55,4 +71,5 @@ export type voxaTransitionObject = {
   textp?: string
   reprompt?: string
   alexaStopAudio?: boolean
+  directives?: any
 }

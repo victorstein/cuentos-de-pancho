@@ -1,9 +1,11 @@
-import { viewType } from '../types'
+import { Translation, ViewType } from '../types'
 import views from './views'
 
-const skillViews: viewType = {
+const translation: Translation = views
+
+const skillViews: ViewType = {
   en: {
-    translation: views
+    translation
   }
 }
 

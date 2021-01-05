@@ -1,6 +1,4 @@
-import { translation } from '../types'
-
-const views: translation = {
+const views = {
   welcome: {
     say: "Hola, bienvenido a cuentos de Pancho Madrigal."
   },
@@ -8,7 +6,7 @@ const views: translation = {
     say: "¿Que cuento de pancho madrigal te gustaria escuchar?"
   },
   search: {
-    say: "Buscando el cuento: {currentStory}."
+    say: "Buscando el cuento: {currentStory}.<break time='3s'/>"
   },
   storyFoundState: {
     say: "Reproduciendo {currentStory}."
