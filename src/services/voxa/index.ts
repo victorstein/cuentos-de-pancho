@@ -1,4 +1,4 @@
-import { AlexaPlatform, VoxaApp } from 'voxa'
+import { AlexaPlatform, VoxaApp, VoxaEvent } from 'voxa'
 import views from './views'
 import variables from './variables'
 import VoxaStates from './states'
@@ -23,8 +23,12 @@ export class Voxa {
   }
 
   addListeners () {
-    this.state.intents.forEach(({ name, handler }) => this.app.onIntent(name, handler))
-    this.state.states.forEach(({ name, handler }) => this.app.onState(name, handler))
+    this.state.intents.forEach(({ name, handler }) => this.app.onIntent(name, (voxaEvent: VoxaEvent) => {
+      return handler(voxaEvent)
+    }))
+    this.state.states.forEach(({ name, handler }) => this.app.onState(name, (voxaEvent: VoxaEvent) => {
+      return handler(voxaEvent)
+    }))
   }
 
   getAlexaSkill (): AlexaPlatform {
