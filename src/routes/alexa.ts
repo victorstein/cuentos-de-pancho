@@ -1,18 +1,16 @@
-import express, { NextFunction, Request, Response, Router } from "express";
+import { NextFunction, Request, Response } from "express";
 import ErrorHandler from "middlewares/errorHandler";
 import { Voxa } from "services/voxa";
 import { Service } from "typedi";
+import Endpoint from "./endpoint";
 
 @Service()
-export default class Alexa {
-  endpointName: string
-  router: Router
-
+export default class Alexa extends Endpoint {
   constructor (
     private voxa: Voxa
   ) {
-    this.endpointName = `/alexa`
-    this.router = express.Router()
+    super();
+    this.endpoint = '/alexa'
     this.router.post('/', (req, res, next) => this.post(req, res, next, this))
   }
 

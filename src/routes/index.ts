@@ -1,8 +1,15 @@
-import Container from 'typedi'
+import { Inject, Service } from 'typedi'
 import Alexa from './alexa'
+import Status from './status'
 
-const alexaRoute = Container.get(Alexa)
+@Service()
+export default class Route {
+  @Inject()
+  alexaRoute: Alexa
+  @Inject()
+  statusRoute: Status
 
-export default [
-  alexaRoute
-]
+  getRoutes () {
+    return Object.values(this)
+  }
+}

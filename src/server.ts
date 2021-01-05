@@ -3,7 +3,7 @@ import config from './config'
 import Loaders from 'loaders'
 import Container, { Service } from 'typedi'
 import { Application, NextFunction, Request, Response } from 'express'
-import routes from 'routes'
+import Route from 'routes'
 import ErrorHandler from 'middlewares/errorHandler'
 import NotFound from './middlewares/notFound'
 
@@ -12,7 +12,8 @@ class Init {
   constructor(
     private loaders: Loaders,
     private errorHandler: ErrorHandler,
-    private notFound: NotFound
+    private notFound: NotFound,
+    private route: Route
   ) {}
 
   waitForLoaders (): Application {
@@ -41,9 +42,8 @@ class Init {
       const app = this.waitForLoaders()
 
       // Add the routes
-      routes.forEach((route) => {
-        app.use(route.endpointName, route.router)
-      })
+      this.route.getRoutes()
+        .forEach((route) => app.use(route.endpoint, route.router))
 
       // Start listening
       await this.listen(app, config.PORT)
