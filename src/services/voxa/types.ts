@@ -9,14 +9,17 @@ export enum STATES {
   storyNotFoundState = 'storyNotFoundState',
   storyFoundState = 'storyFoundState',
   searchingState = 'searchingState',
-  shouldPlayStoryState = 'shouldPlayStoryState',
-  playRandomState = 'PlayRandomIntent'
+  shouldPlayStoryState = 'shouldPlayStoryState'
 }
 
 export enum INTENTS {
   LaunchIntent = 'LaunchIntent',
   CancelIntent = 'CancelIntent',
-  PauseIntent = 'PauseIntent'
+  PauseIntent = 'PauseIntent',
+  tellAStoryIntent = 'tellAStoryIntent',
+  askForStoryIntent = 'askForStoryIntent',
+  developerNoteIntent = 'developerNoteIntent',
+  helpIntent = 'HelpIntent'
 }
 
 export type Intent = {
