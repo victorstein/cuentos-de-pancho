@@ -5,7 +5,8 @@ const {
   NODE_ENV,
   ALLOWED_ORIGINS,
   GOOGLE_API_KEY,
-  CHANNEL_ID
+  CHANNEL_ID,
+  LOG_ROCKET_APP_ID
 } = process.env
 
 export default {
@@ -13,5 +14,6 @@ export default {
   ENV: NODE_ENV || 'development',
   ALLOWED_ORIGINS: ALLOWED_ORIGINS ? ALLOWED_ORIGINS.split(',') : '*',
   CHANNEL_ID: CHANNEL_ID || null,
-  GOOGLE_API_KEY: GOOGLE_API_KEY || null
+  GOOGLE_API_KEY: GOOGLE_API_KEY || null,
+  LOG_ROCKET_APP_ID: LOG_ROCKET_APP_ID || null
 }
