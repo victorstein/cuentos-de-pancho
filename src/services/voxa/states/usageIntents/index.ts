@@ -40,7 +40,7 @@ const usageIntents: Listeners = {
     
         const videos = await videoProvider.searchVideo({ keyword: story })
 
-        console.log(videos, story)
+        // console.log(videos, story)
 
         if (videos.length) {
           // Asign video id to model
