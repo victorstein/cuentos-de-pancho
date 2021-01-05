@@ -1,17 +1,18 @@
 import 'reflect-metadata'
 import config from './config'
-import notFound from './middlewares/notFound'
 import Loaders from 'loaders'
 import Container, { Service } from 'typedi'
 import { Application, NextFunction, Request, Response } from 'express'
 import routes from 'routes'
 import ErrorHandler from 'middlewares/errorHandler'
+import NotFound from './middlewares/notFound'
 
 @Service()
 class Init {
   constructor(
     private loaders: Loaders,
-    private errorHandler: ErrorHandler
+    private errorHandler: ErrorHandler,
+    private notFound: NotFound
   ) {}
 
   waitForLoaders (): Application {
@@ -54,7 +55,7 @@ class Init {
       app.use((err: ErrorHandler, _: Request, res: Response, __:NextFunction) => this.errorHandler.handleError(err, res))
 
       // Handle 404
-      app.use(notFound)
+      app.use(this.notFound.handleNotFound)
     } catch (e) {
       throw new Error(e)
     }
