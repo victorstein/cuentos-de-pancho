@@ -1,4 +1,4 @@
-import { FLOWTYPES, INTENTS, Listeners, STATES } from "services/voxa/types";
+import { FLOWTYPES, INTENTS, Listeners } from "services/voxa/types";
 
 const startIntents: Listeners = {
   intents: [
@@ -6,20 +6,38 @@ const startIntents: Listeners = {
       name: INTENTS.LaunchIntent,
       handler: () => ({
         flow: FLOWTYPES.continue,
-        reply: "welcome",
-        to: STATES.askForStoryState
+        reply: "welcome"
+      })
+    },
+    {
+      name: INTENTS.tellAStoryIntent,
+      handler: () => ({
+        flow: FLOWTYPES.continue,
+        to: "askForStoryState"
+      })
+    },
+    {
+      name: INTENTS.askForStoryIntent,
+      handler: () => ({
+        flow: FLOWTYPES.continue,
+        to: "getStoryNameState"
+      })
+    },
+    {
+      name: INTENTS.developerNoteIntent,
+      handler: () => ({
+        flow: FLOWTYPES.continue,
+        reply: "developerNote"
+      })
+    },
+    {
+      name: INTENTS.helpIntent,
+      handler: () => ({
+        reply: 'help'
       })
     }
   ],
-  states: [
-    {
-      name: STATES.playRandomState,
-      handler: () => ({
-        flow: FLOWTYPES.continue,
-        to: STATES.askForStoryState
-      })
-    }
-  ]
+  states: []
 }
 
 export default startIntents
