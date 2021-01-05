@@ -1,7 +1,7 @@
 import { Service } from "typedi"
 import Axios, { AxiosInstance } from 'axios'
 import config from "config"
-import { Video, googleItems, searchVideoParams } from './types'
+import { Video, GoogleItems, SearchVideoParams } from './types'
 
 @Service()
 export default class VideoProvider {
@@ -20,7 +20,7 @@ export default class VideoProvider {
 
   parseVideoId (results: string): Video[] {
     try {
-      const jsonResults: googleItems = JSON.parse(results)
+      const jsonResults: GoogleItems = JSON.parse(results)
       return jsonResults.items.map(item => ({ id: item.id.videoId, name: item.snippet.title }))
     } catch (e) {
       console.error(`There was an error parsing the google results. ${e.message}`)
@@ -47,7 +47,7 @@ export default class VideoProvider {
     parts = 'id,snippet',
     maxResults = 3,
     order = 'relevance'
-  }: searchVideoParams = {}): Promise<Video[]> {
+  }: SearchVideoParams = {}): Promise<Video[]> {
     try {
       const { data } = await this.axios.get('https://youtube.googleapis.com/youtube/v3/search', {
         params: {

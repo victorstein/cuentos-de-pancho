@@ -1,26 +1,30 @@
 import { AlexaPlatform, VoxaApp } from 'voxa'
 import views from './views'
 import variables from './variables'
-import addListenres from './states'
+import VoxaStates from './states'
 import { Service } from 'typedi'
-import { viewType } from './types'
+import { Listeners, ViewType } from './types'
 import Model from './model'
 
 @Service()
 export class Voxa {
   app: VoxaApp
-  views: viewType
+  views: ViewType
   variables: any
+  state: Listeners
 
   constructor () {
     this.views = views
     this.variables = variables
+    this.state = VoxaStates
     this.app = new VoxaApp({ Model, views, variables })
+    // Add all the listeners
     this.addListeners()
   }
 
   addListeners () {
-    addListenres(this.app)
+    this.state.intents.forEach(({ name, handler }) => this.app.onIntent(name, handler))
+    this.state.states.forEach(({ name, handler }) => this.app.onState(name, handler))
   }
 
   getAlexaSkill (): AlexaPlatform {

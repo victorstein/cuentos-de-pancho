@@ -3,11 +3,11 @@ export type Video = {
   name: string
 }
 
-export type googleItems = {
-  items: googleAPIResult[]
+export type GoogleItems = {
+  items: GoogleAPIResult[]
 }
 
-export type googleAPIResult = {
+export type GoogleAPIResult = {
   kind: string
   etag: string
   id: {
@@ -20,9 +20,9 @@ export type googleAPIResult = {
     title: string
     description: string
     thumbnails: {
-      default: thumbnail,
-      medium: thumbnail,
-      high: thumbnail
+      default: Thumbnail,
+      medium: Thumbnail,
+      high: Thumbnail
     },
     channelTitle: string,
     liveBroadcastContent: string,
@@ -30,13 +30,13 @@ export type googleAPIResult = {
   }
 }
 
-export type thumbnail = {
+export type Thumbnail = {
   url: string
   width: number
   height: number
 }
 
-export type searchVideoParams = {
+export type SearchVideoParams = {
   keyword?: string
   parts?: string
   maxResults?: number
