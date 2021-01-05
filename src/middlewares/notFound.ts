@@ -1,10 +1,12 @@
 import { Response, Request } from "express"
+import { Service } from "typedi"
 
-const notFound = (_: Request, res: Response) => {
-  return res.status(404).json({
-    code: '404',
-    message: 'The requested route or method is not valid'
-  })
+@Service()
+export default class NotFound {
+  handleNotFound(_: Request, res: Response) {
+    return res.status(404).json({
+      code: '404',
+      message: 'The requested route or method is not valid'
+    })
+  }
 }
-
-export default notFound
