@@ -15,7 +15,7 @@ class Loaders {
       // Initialize Express
       const app = this.express.start()
       // Initialize Log Rocket
-      this.sentry.start({ force: true })
+      this.sentry.start()
 
       return app
     } catch (e) {
