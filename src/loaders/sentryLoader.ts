@@ -6,26 +6,23 @@ import config from 'config';
 export default class SentryLoader {
   dsn: string
   serverName: string
+  environment: string
   constructor (
     dsn: string = config.SENTRY_DSN,
     serverName: string = config.SENTRY_SERVER_NAME
   ) {
     this.dsn = dsn
     this.serverName = serverName
+    this.environment = config.ENV
   }
 
-  start ({ force = false }) {
+  start () {
     try {
-      // If not in production don't activate Sentry
-      if (config.ENV !== 'production' && force === false) {
-        console.log('Sentry not initialized environment is not production ⚠️')
-        return
-      }
-
       // Initialize Sentry
       Sentry.init({
         dsn: this.dsn,
-        serverName: this.serverName
+        serverName: this.serverName,
+        environment: this.environment
       }) 
       console.log('Sentry Initialized successfully ✅')
     } catch (e) {
