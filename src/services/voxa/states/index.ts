@@ -1,6 +1,6 @@
-import startIntents from "./startIntents";
-import stopIntents from "./stopIntents";
-import usageIntents from "./usageIntents";
+import startIntents from "./start";
+import stopIntents from "./stop";
+import usageIntents from "./inUse";
 
 const states = {
   intents: [

@@ -19,22 +19,28 @@ export enum INTENTS {
   tellAStoryIntent = 'tellAStoryIntent',
   askForStoryIntent = 'askForStoryIntent',
   developerNoteIntent = 'developerNoteIntent',
+  storyIntent = 'storyIntent',
   helpIntent = 'HelpIntent'
 }
 
+export type Middleware = () => void | Promise<any>
+
 export type Intent = {
   name: INTENTS
-  handler: (voxaEvent: VoxaEvent) => VoxaTransitionObject | Promise<VoxaTransitionObject>
+  handler: (voxaEvent: VoxaEvent) => VoxaTransitionObject | Promise<VoxaTransitionObject>,
+  middleware?: Middleware
 }
 
 export type State = {
   name: STATES
-  handler: (voxaEvent: VoxaEvent) => VoxaTransitionObject | Promise<VoxaTransitionObject>
+  handler: (voxaEvent: VoxaEvent) => VoxaTransitionObject | Promise<VoxaTransitionObject>,
+  middleware?: Middleware
 }
 
 export type Listeners = {
   states: Array<State>
-  intents: Array<Intent>
+  intents: Array<Intent>,
+  middleware?: Middleware
 }
 
 enum LANGUAGES {

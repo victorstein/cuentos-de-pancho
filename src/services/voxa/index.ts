@@ -3,7 +3,7 @@ import views from './views'
 import variables from './variables'
 import VoxaStates from './states'
 import { Service } from 'typedi'
-import { Listeners, ViewType } from './types'
+import { Listeners, ViewType, State, Intent, Middleware } from './types'
 import Model from './model'
 
 @Service()
@@ -22,13 +22,19 @@ export class Voxa {
     this.addListeners()
   }
 
+  parseListeners (stateType: State[] | Intent[], listenerType: 'onState' | 'onIntent', globalMiddleware?: Middleware) {
+    stateType.forEach(({ name, handler, middleware }: State | Intent) => {
+      this.app[listenerType](name, async (voxaEvent: VoxaEvent) => {
+        if (middleware) { await middleware() } else if (globalMiddleware) { await globalMiddleware() }
+        return handler(voxaEvent)
+      })
+    })
+  }
+
   addListeners () {
-    this.state.intents.forEach(({ name, handler }) => this.app.onIntent(name, (voxaEvent: VoxaEvent) => {
-      return handler(voxaEvent)
-    }))
-    this.state.states.forEach(({ name, handler }) => this.app.onState(name, (voxaEvent: VoxaEvent) => {
-      return handler(voxaEvent)
-    }))
+    // Add states And Intent Listeners
+    this.parseListeners(this.state.intents, 'onIntent')
+    this.parseListeners(this.state.states, 'onState')
   }
 
   getAlexaSkill (): AlexaPlatform {

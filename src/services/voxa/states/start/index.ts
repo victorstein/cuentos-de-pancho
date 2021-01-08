@@ -17,6 +17,13 @@ const startIntents: Listeners = {
       })
     },
     {
+      name: INTENTS.storyIntent,
+      handler: () => ({
+        flow: FLOWTYPES.continue,
+        reply: "welcome"
+      })
+    },
+    {
       name: INTENTS.askForStoryIntent,
       handler: () => ({
         flow: FLOWTYPES.continue,
