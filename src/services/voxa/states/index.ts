@@ -1,6 +1,11 @@
 import startIntents from "./start";
 import stopIntents from "./stop";
 import usageIntents from "./inUse";
+import { Middleware } from '../types'
+
+const globalMiddleware: Middleware = (intent) => {
+  console.log(intent)
+}
 
 const states = {
   intents: [
@@ -12,7 +17,8 @@ const states = {
     ...startIntents.states,
     ...stopIntents.states,
     ...usageIntents.states
-  ]
+  ],
+  middleware: globalMiddleware
 }
 
 export default states
