@@ -5,6 +5,9 @@ import VoxaStates from './states'
 import { Service } from 'typedi'
 import { Listeners, ViewType, State, Intent, Middleware } from './types'
 import Model from './model'
+import { Transaction } from '@sentry/tracing'
+import * as Sentry from '@sentry/node'
+import '@sentry/tracing'
 
 @Service()
 export class Voxa {
@@ -12,6 +15,7 @@ export class Voxa {
   views: ViewType
   variables: any
   state: Listeners
+  transaction: Transaction | void
 
   constructor () {
     this.views = views
@@ -24,8 +28,26 @@ export class Voxa {
   parseListeners (stateType: State[] | Intent[], listenerType: 'onState' | 'onIntent', globalMiddleware?: Middleware) {
     stateType.forEach(({ name, handler, middleware }: State | Intent) => {
       this.app[listenerType](name, async (voxaEvent: VoxaEvent) => {
-        if (middleware) { await middleware(name, voxaEvent) } else if (globalMiddleware) { await globalMiddleware(name, voxaEvent) }
-        return handler(voxaEvent)
+        try {
+          // Create a transaction
+          this.transaction = Sentry.startTransaction({ name, data: voxaEvent }) as Transaction
+
+          // Run middlewares
+          if (middleware) { this.transaction = await middleware(name, voxaEvent) }
+          else if (globalMiddleware) { this.transaction = await globalMiddleware(name, voxaEvent) }
+
+          // Handle the voxa request
+          const response = await handler(voxaEvent)
+
+          // Finish the transaction
+          if (this.transaction) this.transaction.finish()
+          
+          //Send the response back
+          return response
+        } catch (e) {
+          if (this.transaction) this.transaction.finish()
+          throw new Error(e)
+        }
       })
     })
   }

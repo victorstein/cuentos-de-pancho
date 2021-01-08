@@ -23,7 +23,7 @@ export enum INTENTS {
   helpIntent = 'HelpIntent'
 }
 
-export type Middleware = (intent: INTENTS | STATES, voxaEvent: VoxaEvent) => void | Promise<any>
+export type Middleware = (intent: INTENTS | STATES, voxaEvent: VoxaEvent) => void | Promise<void>
 
 export type Intent = {
   name: INTENTS
