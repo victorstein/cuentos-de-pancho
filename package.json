@@ -38,6 +38,8 @@
   },
   "homepage": "https://github.com/victorstein/cuentos-de-pancho#readme",
   "dependencies": {
+    "@sentry/node": "^5.29.2",
+    "@sentry/tracing": "^5.29.2",
     "aws-sdk": "^2.820.0",
     "axios": "^0.21.1",
     "cors": "^2.8.5",
@@ -45,7 +47,6 @@
     "express": "^4.17.1",
     "express-sslify": "^1.2.0",
     "helmet": "^4.3.1",
-    "logrocket": "^1.0.14",
     "pm2": "^4.5.1",
     "reflect-metadata": "^0.1.13",
     "typedi": "^0.8.0",
