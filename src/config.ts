@@ -6,7 +6,8 @@ const {
   ALLOWED_ORIGINS,
   GOOGLE_API_KEY,
   CHANNEL_ID,
-  LOG_ROCKET_APP_ID
+  SENTRY_DSN,
+  SENTRY_SERVER_NAME
 } = process.env
 
 export default {
@@ -15,5 +16,6 @@ export default {
   ALLOWED_ORIGINS: ALLOWED_ORIGINS ? ALLOWED_ORIGINS.split(',') : '*',
   CHANNEL_ID: CHANNEL_ID || null,
   GOOGLE_API_KEY: GOOGLE_API_KEY || null,
-  LOG_ROCKET_APP_ID: LOG_ROCKET_APP_ID || null
+  SENTRY_DSN: SENTRY_DSN || 'invalid',
+  SENTRY_SERVER_NAME: SENTRY_SERVER_NAME || ''
 }
