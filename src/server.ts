@@ -6,6 +6,7 @@ import { Application, NextFunction, Request, Response } from 'express'
 import Route from 'routes'
 import ErrorHandler from 'middlewares/errorHandler'
 import NotFound from './middlewares/notFound'
+import * as Sentry from '@sentry/node'
 
 @Service()
 class Init {
@@ -57,6 +58,7 @@ class Init {
       // Handle 404
       app.use(this.notFound.handleNotFound)
     } catch (e) {
+      Sentry.captureException(e)
       throw new Error(e)
     }
   }
