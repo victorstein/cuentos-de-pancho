@@ -18,14 +18,13 @@ export class Voxa {
     this.variables = variables
     this.state = VoxaStates
     this.app = new VoxaApp({ Model, views, variables })
-    // Add all the listeners
     this.addListeners()
   }
 
   parseListeners (stateType: State[] | Intent[], listenerType: 'onState' | 'onIntent', globalMiddleware?: Middleware) {
     stateType.forEach(({ name, handler, middleware }: State | Intent) => {
       this.app[listenerType](name, async (voxaEvent: VoxaEvent) => {
-        if (middleware) { await middleware() } else if (globalMiddleware) { await globalMiddleware() }
+        if (middleware) { await middleware(name, voxaEvent) } else if (globalMiddleware) { await globalMiddleware(name, voxaEvent) }
         return handler(voxaEvent)
       })
     })
@@ -33,8 +32,8 @@ export class Voxa {
 
   addListeners () {
     // Add states And Intent Listeners
-    this.parseListeners(this.state.intents, 'onIntent')
-    this.parseListeners(this.state.states, 'onState')
+    this.parseListeners(this.state.intents, 'onIntent', this.state.middleware)
+    this.parseListeners(this.state.states, 'onState', this.state.middleware)
   }
 
   getAlexaSkill (): AlexaPlatform {
