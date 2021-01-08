@@ -1,13 +1,13 @@
 import { Application } from 'express'
 import { Service } from 'typedi'
 import ExpressLoader from 'loaders/expressLoader'
-import LogRocketLoader from './logRocketLoader'
+import SentryLoader from './sentryLoader'
 
 @Service()
 class Loaders {
   constructor (
     private express: ExpressLoader,
-    private logRocket: LogRocketLoader
+    private sentry: SentryLoader
   ) {}
 
   load (): Application {
@@ -15,7 +15,7 @@ class Loaders {
       // Initialize Express
       const app = this.express.start()
       // Initialize Log Rocket
-      this.logRocket.start()
+      this.sentry.start({ force: true })
 
       return app
     } catch (e) {
