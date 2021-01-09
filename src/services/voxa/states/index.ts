@@ -3,8 +3,8 @@ import stopIntents from "./stop";
 import usageIntents from "./inUse";
 import { Middleware } from '../types'
 
-const globalMiddleware: Middleware = (intent) => {
-  console.log(intent)
+const globalMiddleware: Middleware = () => {
+  // console.log(intent)
 }
 
 const states = {

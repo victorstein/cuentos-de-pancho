@@ -34,6 +34,8 @@ NODE_ENV| Ambiente de entorno | FALSE | development
 ALLOWED_ORIGINS | Origines permitidos para usar el API, separados por coma. | FALSE | *
 CHANNEL_ID | Id del canal de youtube para obtener los adios | TRUE | 
 GOOGLE_API_KEY | Llave secreta para usar el API de Youtube | TRUE |
+SENTRY_DSN | DSN to connecto Sentry | FALSE |
+SENTRY_SERVER_NAME | Sentry Server name | FALSE |
 
 * Para empezar el desarrollo puedes usar el comando ```npm run dev```. Para transpilar a JS puedes usar ```npm run build``` o ```npm start``` (una vez transpilado) para inciar el servidor desde la carpeta dist.
 

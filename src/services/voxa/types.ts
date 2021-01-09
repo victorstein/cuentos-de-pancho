@@ -23,7 +23,7 @@ export enum INTENTS {
   helpIntent = 'HelpIntent'
 }
 
-export type Middleware = (intent: INTENTS | STATES, voxaEvent: VoxaEvent) => void | Promise<any>
+export type Middleware = (intent: INTENTS | STATES, voxaEvent: VoxaEvent) => void | Promise<void>
 
 export type Intent = {
   name: INTENTS
@@ -81,4 +81,132 @@ export type VoxaTransitionObject = {
   reprompt?: string
   alexaStopAudio?: boolean
   directives?: any
+}
+
+export interface AlexaRequest {
+  version: string;
+  session: Session;
+  context: Context;
+  request: Request;
+}
+
+export interface Context {
+  Viewports:   ViewportElement[];
+  AudioPlayer: AudioPlayer;
+  Viewport:    PurpleViewport;
+  Extensions:  Extensions;
+  System:      System;
+}
+
+export interface AudioPlayer {
+  playerActivity: string;
+}
+
+export interface Extensions {
+  available: Available;
+}
+
+export interface Available {
+  "aplext:backstack:10": AplextBackstack10;
+}
+
+export interface AplextBackstack10 {
+}
+
+export interface System {
+  application:    Application;
+  user:           User;
+  device:         Device;
+  apiEndpoint:    string;
+  apiAccessToken: string;
+}
+
+export interface Application {
+  applicationId: string;
+}
+
+export interface Device {
+  deviceId:            string;
+  supportedInterfaces: SupportedInterfaces;
+}
+
+export interface SupportedInterfaces {
+  AudioPlayer: AplextBackstack10;
+}
+
+export interface User {
+  userId:      string;
+  permissions: Permissions;
+}
+
+export interface Permissions {
+  consentToken: string;
+}
+
+export interface PurpleViewport {
+  experiences:        Experience[];
+  mode:               string;
+  shape:              string;
+  pixelWidth:         number;
+  pixelHeight:        number;
+  dpi:                number;
+  currentPixelWidth:  number;
+  currentPixelHeight: number;
+  touch:              string[];
+  video:              Video;
+}
+
+export interface Experience {
+  arcMinuteWidth:  number;
+  arcMinuteHeight: number;
+  canRotate:       boolean;
+  canResize:       boolean;
+}
+
+export interface Video {
+  codecs: string[];
+}
+
+export interface ViewportElement {
+  type:             string;
+  id:               string;
+  shape:            string;
+  dpi:              number;
+  presentationType: string;
+  canRotate:        boolean;
+  configuration:    Configuration;
+}
+
+export interface Configuration {
+  current: Current;
+}
+
+export interface Current {
+  mode:  string;
+  video: Video;
+  size:  Size;
+}
+
+export interface Size {
+  type:        string;
+  pixelWidth:  number;
+  pixelHeight: number;
+}
+
+export interface Request {
+  type:      string;
+  requestId: string;
+  locale:    string;
+  timestamp: Date;
+  intent:   {
+    name:               string;
+    confirmationStatus: string;
+  }
+}
+
+export interface Session {
+  new:         boolean;
+  sessionId:   string;
+  application: Application;
+  user:        User;
 }
