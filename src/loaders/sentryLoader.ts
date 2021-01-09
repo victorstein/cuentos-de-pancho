@@ -22,7 +22,8 @@ export default class SentryLoader {
       Sentry.init({
         dsn: this.dsn,
         serverName: this.serverName,
-        environment: this.environment
+        environment: this.environment,
+        tracesSampleRate: 1
       }) 
       console.log('Sentry Initialized successfully ✅')
     } catch (e) {
