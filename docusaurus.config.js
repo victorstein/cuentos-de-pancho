@@ -13,7 +13,7 @@ module.exports = {
       title: 'Cuentos de Pancho Madrigal',
       logo: {
         alt: 'Cuentos de Pancho Madrigal',
-        src: 'img/logo.svg',
+        src: 'img/logo.jpg',
       },
       items: [
         {
