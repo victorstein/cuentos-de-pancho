@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[9],{79:function(o){o.exports=JSON.parse('{"allTagsPath":"/cuentos-de-pancho/blog/tags","slug":"hello","name":"hello","count":2,"permalink":"/cuentos-de-pancho/blog/tags/hello"}')}}]);
