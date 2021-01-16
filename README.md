@@ -2,7 +2,7 @@
 
 En esta rama se encuentra la documentacion, politica de privacidad y terminos de uso de la skill de Alexa de cuentos de Pancho Madrigal. Aqui encontraras los pasos para iniciar el sitio web desde tu ambiente local.
 
-## instalacion
+## Instalacion
 
 ```
 yarn install
