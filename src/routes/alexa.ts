@@ -10,16 +10,15 @@ import { Transaction } from "@sentry/tracing";
 
 @Service()
 export default class Alexa extends Endpoint {
-  transaction: Transaction
   constructor (
     private voxa: Voxa
   ) {
     super();
     this.endpoint = '/alexa'
-    this.router.post('/', (req, res, next) => this.post(req, res, next, this))
+    this.router.post('/', this.post)
   }
 
-  createTransaction (req: Request) {
+  createTransaction = (req: Request): Transaction => {
     try {
       // Get request data
       const voxaRequest: AlexaRequest = req.body
@@ -27,22 +26,24 @@ export default class Alexa extends Endpoint {
       const requestType = voxaRequest.request.type
       const userId = voxaRequest?.session?.user?.userId
       // Start monitoring
-      this.transaction = Sentry.startTransaction({ name: name || requestType, data: voxaRequest }) as Transaction
+      const transaction = Sentry.startTransaction({ name: name || requestType, data: voxaRequest }) as Transaction
       Sentry.setUser({ id: userId });
+      return transaction
     } catch (e) {
       throw new Error(e)
     }
   }
 
-  async post(req: Request, res: Response, next: NextFunction, context: Alexa) {
+  post = async (req: Request, res: Response, next: NextFunction) => {
+    let transaction
     try {
-      this.createTransaction(req)
-      const skill = context.voxa.getAlexaSkill()
+      transaction = this.createTransaction(req)
+      const skill = this.voxa.getAlexaSkill()
       const reply = await skill.execute(req.body)
-      this.transaction.finish()
+      transaction.finish()
       res.json(reply)
     } catch (e) {
-      this.transaction.finish()
+      if (transaction) transaction.finish()
       next(new ErrorHandler(505, `Error replying to request. ${e.message}`))
     }
   }
