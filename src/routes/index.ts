@@ -3,7 +3,7 @@ import Alexa from './alexa'
 import Status from './status'
 
 @Service()
-export default class Route {
+export default class Routes {
   @Inject()
   alexaRoute: Alexa
   @Inject()
