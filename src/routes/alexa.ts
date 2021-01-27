@@ -1,22 +1,18 @@
-// import { Transaction } from "@sentry/tracing";
 import { NextFunction, Request, Response } from "express";
 import ErrorHandler from "middlewares/errorHandler";
 import { Voxa } from "services/voxa";
 import { Service } from "typedi";
-import Endpoint from "./endpoint";
 import * as Sentry from '@sentry/node'
 import { AlexaRequest } from "services/voxa/types";
 import { Transaction } from "@sentry/tracing";
+import { Route, Post } from '../decorators/express'
 
 @Service()
-export default class Alexa extends Endpoint {
+@Route('/alexa')
+export default class Alexa {
   constructor (
     private voxa: Voxa
-  ) {
-    super();
-    this.endpoint = '/alexa'
-    this.router.post('/', this.post)
-  }
+  ) {}
 
   createTransaction = (req: Request): Transaction => {
     try {
@@ -34,7 +30,8 @@ export default class Alexa extends Endpoint {
     }
   }
 
-  post = async (req: Request, res: Response, next: NextFunction) => {
+  @Post()
+  async post (req: Request, res: Response, next: NextFunction) {
     let transaction
     try {
       transaction = this.createTransaction(req)

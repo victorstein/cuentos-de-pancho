@@ -3,7 +3,7 @@ import config from './config'
 import Loaders from 'loaders'
 import Container, { Service } from 'typedi'
 import { Application, NextFunction, Request, Response } from 'express'
-import Route from 'routes'
+import Routes from 'routes'
 import ErrorHandler from 'middlewares/errorHandler'
 import NotFound from './middlewares/notFound'
 import * as Sentry from '@sentry/node'
@@ -14,7 +14,7 @@ class Init {
     private loaders: Loaders,
     private errorHandler: ErrorHandler,
     private notFound: NotFound,
-    private route: Route
+    private routes: Routes
   ) {}
 
   waitForLoaders (): Application {
@@ -43,7 +43,7 @@ class Init {
       const app = this.waitForLoaders()
 
       // Add the routes
-      this.route.getRoutes()
+      this.routes.getRoutes()
         .forEach((route) => app.use(route.endpoint, route.router))
 
       // Start listening
