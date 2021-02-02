@@ -6,8 +6,8 @@ import SentryLoader from './sentryLoader'
 @Service()
 class Loaders {
   constructor (
-    private express: ExpressLoader,
-    private sentry: SentryLoader
+    private readonly express: ExpressLoader,
+    private readonly sentry: SentryLoader
   ) {}
 
   load (): Application {
@@ -19,7 +19,7 @@ class Loaders {
 
       return app
     } catch (e) {
-      throw new Error(`There was an error initializing your loaders 💥 -> ${e.message}`)
+      throw new Error(`There was an error initializing your loaders 💥 -> ${e.message as string}`)
     }
   }
 }

@@ -6,10 +6,11 @@ import Status from './status'
 export default class Routes {
   @Inject()
   alexaRoute: Alexa
+
   @Inject()
   statusRoute: Status
 
-  getRoutes () {
+  getRoutes (): any[] {
     return Object.values(this)
   }
 }

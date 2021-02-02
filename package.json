@@ -4,8 +4,7 @@
   "description": "Habilidad de Alexa para escuchar cuentos de Pancho Madrigal",
   "main": "dist/server.js",
   "engines": {
-    "node": "12.18.3",
-    "npm": "6.14.10"
+    "node": "12.18.3"
   },
   "scripts": {
     "heroku-prebuild": "npm install voxa",
@@ -16,7 +15,9 @@
     "optimize": "webpack",
     "build": "npm run transpile && npm run optimize",
     "start": "pm2-runtime start dist/server.bundle.js -i 4 --name m2",
-    "test": "jest"
+    "test": "jest",
+    "lint": "ts-standard",
+    "fix": "ts-standard --fix"
   },
   "repository": {
     "type": "git",
@@ -61,10 +62,18 @@
     "@types/webpack-node-externals": "^2.5.0",
     "ngrok": "^3.4.0",
     "ts-node-dev": "^1.1.1",
+    "ts-standard": "^10.0.0",
     "tsconfig-paths": "^3.9.0",
     "typescript": "^4.1.3",
     "webpack": "^5.11.1",
     "webpack-cli": "^4.3.0",
     "webpack-node-externals": "^2.5.2"
+  },
+  "ts-standard": {
+    "ignore": [
+      "build",
+      "_transpiled",
+      "webpack.config.ts"
+    ]
   }
 }

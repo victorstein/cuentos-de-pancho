@@ -1,6 +1,6 @@
-import { VoxaEvent } from "voxa";
+import { VoxaEvent } from 'voxa'
 
-const currentStory = async (voxaEvent: VoxaEvent) => {
+const currentStory = (voxaEvent: VoxaEvent): string => {
   return voxaEvent.model.currentStory
 }
 

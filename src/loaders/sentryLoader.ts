@@ -1,6 +1,6 @@
 import * as Sentry from '@sentry/node'
-import { Service } from 'typedi';
-import config from 'config';
+import { Service } from 'typedi'
+import config from 'config'
 
 @Service()
 export default class SentryLoader {
@@ -16,7 +16,7 @@ export default class SentryLoader {
     this.environment = config.ENV
   }
 
-  start () {
+  start (): void {
     try {
       // Initialize Sentry
       Sentry.init({
@@ -24,7 +24,7 @@ export default class SentryLoader {
         serverName: this.serverName,
         environment: this.environment,
         tracesSampleRate: 1
-      }) 
+      })
       console.log('Sentry Initialized successfully ✅')
     } catch (e) {
       console.warn('Error Initializing Sentry: 🚨 ->', e.message)
