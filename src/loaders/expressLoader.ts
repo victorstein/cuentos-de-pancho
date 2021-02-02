@@ -23,7 +23,7 @@ export default class ExpressLoader {
   start (): Application {
     try {
       this.app.use(json({ limit: '200kb' }))
-      
+
       // Basic security for production
       if (this.env === 'production') {
         this.app.use(helmet())

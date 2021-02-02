@@ -1,42 +1,42 @@
-export type Video = {
+export interface Video {
   id: string
   name: string
 }
 
-export type GoogleItems = {
+export interface GoogleItems {
   items: GoogleAPIResult[]
 }
 
-export type GoogleAPIResult = {
+export interface GoogleAPIResult {
   kind: string
   etag: string
   id: {
     kind: string
     videoId: string
-  },
+  }
   snippet: {
     publishedAt: Date
     channelId: string
     title: string
     description: string
     thumbnails: {
-      default: Thumbnail,
-      medium: Thumbnail,
+      default: Thumbnail
+      medium: Thumbnail
       high: Thumbnail
-    },
-    channelTitle: string,
-    liveBroadcastContent: string,
+    }
+    channelTitle: string
+    liveBroadcastContent: string
     publishTime: Date
   }
 }
 
-export type Thumbnail = {
+export interface Thumbnail {
   url: string
   width: number
   height: number
 }
 
-export type SearchVideoParams = {
+export interface SearchVideoParams {
   keyword?: string
   parts?: string
   maxResults?: number

@@ -1,4 +1,4 @@
-import { FLOWTYPES, INTENTS, STATES, Listeners } from "services/voxa/types";
+import { FLOWTYPES, INTENTS, STATES, Listeners } from 'services/voxa/types'
 
 const stopIntents: Listeners = {
   intents: [
@@ -23,7 +23,7 @@ const stopIntents: Listeners = {
       handler: () => ({
         alexaStopAudio: true,
         flow: FLOWTYPES.terminate,
-        reply: "farewell"
+        reply: 'farewell'
       })
     }
   ]

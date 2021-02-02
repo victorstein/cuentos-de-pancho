@@ -1,15 +1,15 @@
 export default class Model {
-  constructor(data = {}) {
-    Object.assign(this, data);
+  constructor (data = {}) {
+    Object.assign(this, data)
   }
 
-  static deserialize(data: any) {
-    return new this(data);
+  static deserialize (data: any): Model {
+    return new this(data)
   }
 
-  serialize() {
-    return this;
+  serialize (): Model {
+    return this
   }
 }
 
-module.exports = Model;
+module.exports = Model

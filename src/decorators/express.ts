@@ -1,7 +1,7 @@
 import { Router } from 'express'
 
 type Constructor = new (...args: any[]) => {}
-type Meta = {
+interface Meta {
   requestType: 'get' | 'post' | 'put' | 'delete' | 'head' | 'trace' | 'options' | 'connect' | 'patch'
   route: string
   methodName: string
@@ -9,7 +9,7 @@ type Meta = {
 const routeHandler = Symbol('routeHandler')
 
 export function Route (endpoint: string) {
-  return function <T extends Constructor> (target: T, ) {
+  return function <T extends Constructor> (target: T) {
     return class extends target {
       router: Router
       endpoint: string
@@ -18,8 +18,9 @@ export function Route (endpoint: string) {
         super(...args)
         this.router = Router()
         this.endpoint = endpoint
+        const routeHandlers = target.prototype[routeHandler] as []
 
-        if (target.prototype[routeHandler].length) {
+        if (routeHandlers.length > 0) {
           target.prototype[routeHandler].forEach(({ requestType, route, methodName }: Meta) => {
             switch (requestType) {
               case 'get':
@@ -28,7 +29,7 @@ export function Route (endpoint: string) {
               case 'post':
                 this.router.post(route, target.prototype[methodName].bind(this))
             }
-          });
+          })
         }
       }
     }
@@ -37,11 +38,12 @@ export function Route (endpoint: string) {
 
 export function Post (route?: string) {
   return function (target: any, methodName: string) {
-    target[routeHandler] = target[routeHandler] || []
+    const currentHandler = target[routeHandler] as [] | undefined
+    target[routeHandler] = currentHandler ?? []
     // Create metaData
     const meta: Meta = {
       requestType: 'post',
-      route: route || '/',
+      route: route ?? '/',
       methodName
     }
 
@@ -50,15 +52,16 @@ export function Post (route?: string) {
 }
 
 export function Get (route?: string) {
-	return function (target: any, methodName: string) {
-    target[routeHandler] = target[routeHandler] || []
+  return function (target: any, methodName: string) {
+    const currentHandler = target[routeHandler] as [] | undefined
+    target[routeHandler] = currentHandler ?? []
     // Create metaData
     const meta: Meta = {
       requestType: 'get',
-      route: route || '/',
+      route: route ?? '/',
       methodName
     }
-    
+
     target[routeHandler].push(meta)
-	}
+  }
 }

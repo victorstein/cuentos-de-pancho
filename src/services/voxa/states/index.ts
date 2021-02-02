@@ -1,6 +1,6 @@
-import startIntents from "./start";
-import stopIntents from "./stop";
-import usageIntents from "./inUse";
+import startIntents from './start'
+import stopIntents from './stop'
+import usageIntents from './inUse'
 import { Middleware } from '../types'
 
 const globalMiddleware: Middleware = () => {

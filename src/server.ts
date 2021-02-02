@@ -10,11 +10,11 @@ import * as Sentry from '@sentry/node'
 
 @Service()
 class Init {
-  constructor(
-    private loaders: Loaders,
-    private errorHandler: ErrorHandler,
-    private notFound: NotFound,
-    private routes: Routes
+  constructor (
+    private readonly loaders: Loaders,
+    private readonly errorHandler: ErrorHandler,
+    private readonly notFound: NotFound,
+    private readonly routes: Routes
   ) {}
 
   waitForLoaders (): Application {
@@ -30,14 +30,14 @@ class Init {
 
   async listen (app: Application, port: number = 3002): Promise<void> {
     // Create a promise to listen for errors on server listen
-    return new Promise((resolve, reject) => {
+    return await new Promise((resolve, reject) => {
       app.listen(port)
         .once('listening', () => resolve())
-        .once('error', () => reject())
+        .once('error', (e) => reject(e))
     })
   }
 
-  async start () {
+  async start (): Promise<void> {
     try {
       // Get the express app
       const app = this.waitForLoaders()
@@ -47,13 +47,13 @@ class Init {
         .forEach((route) => app.use(route.endpoint, route.router))
 
       // Start listening
-      await this.listen(app, config.PORT)
+      await this.listen(app, Number(config.PORT))
 
       // Alert that the server is already in place
       console.log(`Server running at http://localhost:${config.PORT} 🚀`)
 
       // Handle Errors
-      app.use((err: ErrorHandler, _: Request, res: Response, __:NextFunction) => this.errorHandler.handleError(err, res))
+      app.use((err: ErrorHandler, _: Request, res: Response, __: NextFunction) => this.errorHandler.handleError(err, res))
 
       // Handle 404
       app.use(this.notFound.handleNotFound)
@@ -65,4 +65,7 @@ class Init {
 }
 
 export const server = Container.get(Init)
+
 server.start()
+  .then(() => console.log('Done Initializing'))
+  .catch((e) => console.log(e))
