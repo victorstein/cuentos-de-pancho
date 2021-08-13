@@ -60,7 +60,7 @@ export enum FLOWTYPES {
 
 export interface Translation {
   [y: string]: {
-    [key in keyof typeof ACTIONS]?: string
+    [key in keyof typeof ACTIONS]?: string | string[]
   }
 }
 
