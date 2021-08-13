@@ -3,10 +3,10 @@ const views = {
     say: 'Hola, bienvenido a cuentos de Pancho Madrigal. Para pedirle a pancho que cuente un cuento puedes decir: Alexa, dile a Pancho Madrigal que me cuente un cuento.'
   },
   askForStory: {
-    say: '¿Que cuento de pancho madrigal te gustaria escuchar?'
+    say: '¿Que tipo de cuento de pancho madrigal te gustaria escuchar?'
   },
   search: {
-    say: 'Buscando el cuento: {currentStory}.<break time="2s"/>'
+    say: 'Buscando un cuento de: {currentStory}.<break time="2s"/>'
   },
   storyFoundState: {
     say: 'Reproduciendo {currentStory}.'
@@ -15,7 +15,10 @@ const views = {
     say: 'No encontre un cuento relacionado. ¿Te gustaria escuchar un cuento popular de pancho?'
   },
   farewell: {
-    say: 'Gracias por escuchar los cuentos. Como diría Pancho: Auténtico amigo. Ahi nos vemos Filiberto!'
+    say: [
+      'Gracias por escuchar los cuentos. Como diría Pancho: Auténtico amigo. Ahi nos vemos Filiberto!',
+      'Gracias por escuchar los cuentos.'
+    ]
   },
   error: {
     say: 'Hubo un error al iniciar la skill. Contáctate con el desarrollador.'
