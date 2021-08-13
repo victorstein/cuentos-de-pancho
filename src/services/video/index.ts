@@ -2,7 +2,7 @@ import { Service } from 'typedi'
 import Axios, { AxiosInstance } from 'axios'
 import config from 'config'
 import { Video, GoogleItems, SearchVideoParams } from './types'
-import youtubedl, { YtResponse } from 'youtube-dl-exec'
+import youtubedl from 'youtube-dl-exec'
 
 @Service()
 export default class VideoProvider {
@@ -58,14 +58,14 @@ export default class VideoProvider {
     }
   }
 
-  async getAudioTrack (videoId: string): Promise<YtResponse> {
+  async getAudioTrack (videoId: string): Promise<string> {
     try {
       const audioUrl = await youtubedl(`https://www.youtube.com/watch?v=${videoId}`, {
         extractAudio: true,
         getUrl: true
       })
 
-      return audioUrl
+      return audioUrl as unknown as string
     } catch (e) {
       throw new Error(`There was an error getting the audio track. ${e.message as string}`)
     }
