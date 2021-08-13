@@ -2,6 +2,7 @@ import { Service } from 'typedi'
 import Axios, { AxiosInstance } from 'axios'
 import config from 'config'
 import { Video, GoogleItems, SearchVideoParams } from './types'
+import youtubedl, { YtResponse } from 'youtube-dl-exec'
 
 @Service()
 export default class VideoProvider {
@@ -26,20 +27,6 @@ export default class VideoProvider {
       console.error(`There was an error parsing the google results. ${e.message as string}`)
       return []
     }
-  }
-
-  parseAudioTrack (str: string): any {
-    // Turn URI into JSON Object
-    const parsedData = str.split('&').reduce((params: any, param: any) => {
-      const paramSplit = param
-        .split('=')
-        .map((value: any) => decodeURIComponent(value.replace('+', ' ')))
-
-      params[paramSplit[0]] = paramSplit[1]
-      return params
-    }, {})
-
-    return parsedData
   }
 
   async searchVideo ({
@@ -71,21 +58,14 @@ export default class VideoProvider {
     }
   }
 
-  async getAudioTrack (videoId: string): Promise<string> {
+  async getAudioTrack (videoId: string): Promise<YtResponse> {
     try {
-      const { data: ytData } = await this.axios.get('https://www.youtube.com/get_video_info', {
-        params: { video_id: videoId },
-        transformResponse: [(data) => {
-          return this.parseAudioTrack(data)
-        }]
+      const audioUrl = await youtubedl(`https://www.youtube.com/watch?v=${videoId}`, {
+        extractAudio: true,
+        getUrl: true
       })
 
-      var getAdaptiveFormats = JSON.parse(ytData.player_response).streamingData.adaptiveFormats
-      var findAudioInfo = getAdaptiveFormats.findIndex((obj: any) => obj.audioQuality)
-
-      // get the URL for the audio file
-      var audioURL = getAdaptiveFormats[findAudioInfo].url
-      return audioURL
+      return audioUrl
     } catch (e) {
       throw new Error(`There was an error getting the audio track. ${e.message as string}`)
     }
