@@ -53,7 +53,7 @@ Pueden enviar sus Pull Request para mejorar cualquier aspecto de la habilidad, m
 Esta habilidad fue creada en memoria de dos grandes fanaticos de Pancho Madrigal y con la unica motivacion de entretener a la gente tanto como los cuentos de Pancho Madrigal entretenian a mis queridos abuelos.
 
 <div style="width: 100%; display: flex; justify-content: center; margin: 5% 0px;">
-  <img style="width: 50%; height: auto;" src="https://lh3.googleusercontent.com/pw/ACtC-3d40TgKZbNKJDf7I0Tu4GPshJO1SNEgIqs_ZEVshGmUjLBwYRQmwhG4g_3YdeG_8N47fd2SwNM6NMlA6AKvWY_pX4RA34vZBDc6HEw6D05koN7I8RxK7Oap_Ai_XosTY-xz99RxpyNtCROTnQWg-Ov9=w1280-h960-no?authuser=0" />
+  <img style="width: 50%; height: auto;" src="https://lh3.googleusercontent.com/nCYL9FSTKQl4QcxQoXt1h8a0Cg7WQZPWmt8NhXo4LZ1mr8E5hfIY-OpV4Vk8I6PJ_XzfKboTM9leDyzblyKDlvQlbX2YpEz19qw-NGJcJZMNO0av5rbl-ueEA7QoDk3bneL2GQsEbc0PNeNoxmSwjsGiYLI3uqL5mREhLGKG61WAAca5vstQdhnwiJo_gmQYMhkAPx-O1udO4c8atrWue9Cts5FPGlBiiNxlcr2BxQhJoRfip84-gB0J69sGF5Dutx1Xvzo6BYDiTn-dJWS8rQFqrYbNHRHtBgdcV2nl2dcFwv0iXeGiyuo7bsfx4II-tdvLtU0SDx4HRz2F6fGB77fW0niKM9NWsyyzGWIFmu86AQzA4ZMttGDYG1GXwFjTc70Ard801XgMkTtN7diXAk_JxZeRSTtu8tsOLCFn8OOE1mLsj_24ExNva3gUfoLxXZWHofvbuCRq-uSnbLnPT1BA6QcuJMbdl81UtJG65wb4IwGMUVNGN-5ti1b7-IlougltQtqR_iQs4DOnjkPIYpKvD7jO-fFsHs_PN02aYoK5J7nrg3PHEXT_059Sh_GvogI5p_0XMFkK29CtkA0aw7-wbCQi1NjGWyjLKnF5mDUqGUSR7JrNTP6E1SIcfGy3dHFwMBb6fjY2oKo4jtzbpDkGB0j1F5Mf2gqU5ZmT3wL2dB1dBBWSU1goh_5JSbCuqgNIGMaqfABZl03fee8PsfKz=w570-h678-no?authuser=0" />
 </div>
 
 > Emilio Alfonso Selva Maldonado (13 de Diciembre 1937 - 26 de Mayo 2020)<br>
